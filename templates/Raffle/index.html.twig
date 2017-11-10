@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-lg-5 text-white" style="text-shadow: 0 0 10px #000;">
+            <br/><br/><br/><br/>
+
+            <form action="/web/raffle/start" method="POST">
+                <table class="table table-condensed">
+
+                    {% for event in events %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="{{ event.id }}">
+                            </td>
+                            <td>
+                                {{ event.name }}
+                            </td>
+                            <td>
+                                {{ event.date|date('Y-m-d') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <button type="submit" class="btn btn-success btn-lg">New raffle</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

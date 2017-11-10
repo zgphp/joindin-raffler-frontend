@@ -1,12 +1,19 @@
 default:
     suites:
-        default:
+        raffle_web:
             contexts:
-                - FeatureContext:
+                - RaffleWebContext:
                     kernel: '@kernel'
+            filters:
+                tags: "@raffle && @web"
 
     extensions:
         Behat\Symfony2Extension:
             kernel:
                 bootstrap: features/bootstrap/bootstrap.php
                 class: App\Kernel
+        Behat\MinkExtension:
+            base_url:  'http://test.raffler.loc:8000/'
+            sessions:
+                default:
+                    symfony2: ~

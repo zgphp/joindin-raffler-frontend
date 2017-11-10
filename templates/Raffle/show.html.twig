@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row text-center">
+        {% for comment in raffle.commentsEligibleForRaffling %}
+            <div class="col-md-2 text-white" style="text-shadow: 0 0 10px #000;">
+                {{ comment.user.displayName }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row text-center " style="position: absolute; bottom: 50px; width: 100%;">
+        <div class="col-md-4">
+            Raffling {{ raffle.events | length }} events!
+        </div>
+        <div class="col-md-4">
+            {% if raffle.commentsEligibleForRaffling | length > 0 %}
+                <form action="{{ path('raffle_web_pick', {'id': raffle.id}) }}" method="POST">
+                    <button type="submit" class="btn btn-success btn-lg"> RAFFLE!</button>
+                </form>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            There are {{ raffle.commentsEligibleForRaffling | length }} eligible!
+        </div>
+    </div>
+
+{% endblock %}
+

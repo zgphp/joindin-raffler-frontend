@@ -29,9 +29,9 @@ jobs:
           name: PHPUnit
           command: ./vendor/bin/phpunit
 
-      - run:
-          name: Behat
-          command: ./vendor/bin/behat
+#      - run:
+#          name: Behat
+#          command: ./vendor/bin/behat
 
       - run:
           name: PHPStan

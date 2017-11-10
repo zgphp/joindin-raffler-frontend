@@ -1,12 +1,81 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom CSS -->
+    <link href="/css/stylish-portfolio.css" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+
+</head>
+
+<body>
+<!-- Navigation -->
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle">
+    <i class="fa fa-bars"></i>
+</a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+            <i class="fa fa-times"></i>
+        </a>
+        <li class="sidebar-brand">
+            <a class="js-scroll-trigger" href="/web/">Home</a>
+        </li>
+        <li>
+            <a class="js-scroll-trigger" href="#top">zz</a>
+        </li>
+    </ul>
+
+</nav>
+
+<!-- Header -->
+<header class="header" id="top">
+    <div class="text-vertical-center">
+
+        <div style="position: absolute; top: 0; width: 100%;">
+            <div class="text-center" style="background-color:#fff;opacity: 0.7;width: 100%; height: 120px;">
+
+                <img src="/img/sponsors/codeanywhere-logo-300x220.png" style="height: 100px;"/> &nbsp;&nbsp;
+                <img src="/img/sponsors/PhpStorm.ico" style="height: 100px;"/> &nbsp;&nbsp;
+                <img src="/img/sponsors/shift-logo.png" style="height: 100px;"/>
+            </div>
+        </div>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    </div>
+</header>
+
+<!-- Bootstrap core JavaScript -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="/js/stylish-portfolio.js"></script>
+
+<script type="text/javascript">
+    var images = ['1.jpg', '2.jpg', '4.png', '5.jpg', '6.jpg', '7.png', '8.jpg', '9.jpg'];
+    $('#top').css({'background-image': 'url(/img/zagreb/' + images[Math.floor(Math.random() * images.length)] + ')'});
+</script>
+
+{% block javascripts %}{% endblock %}
+
+</body>
+
 </html>
