@@ -41,6 +41,8 @@ services:
     extra_hosts:
       - "dev.frontend-raffler.loc:172.17.0.1"
       - "test.frontend-raffler.loc:172.17.0.1"
+      - "dev.raffler.loc:172.17.0.1"
+      - "test.raffler.loc:172.17.0.1"
 
   raffler-frontend-php7fpm-test:
     container_name: raffler-frontend-php7fpm-test
@@ -60,6 +62,8 @@ services:
     extra_hosts:
       - "dev.frontend-raffler.loc:172.17.0.1"
       - "test.frontend-raffler.loc:172.17.0.1"
+      - "dev.raffler.loc:172.17.0.1"
+      - "test.raffler.loc:172.17.0.1"
 
   raffler-frontend-workspace:
     container_name: raffler-frontend-workspace
@@ -72,6 +76,8 @@ services:
     extra_hosts:
       - "dev.frontend-raffler.loc:172.17.0.1"
       - "test.frontend-raffler.loc:172.17.0.1"
+      - "dev.raffler.loc:172.17.0.1"
+      - "test.raffler.loc:172.17.0.1"
     environment:
       APP_ENV: dev
       APP_DEBUG: 1
@@ -87,6 +93,8 @@ services:
     extra_hosts:
       - "dev.frontend-raffler.loc:172.17.0.1"
       - "test.frontend-raffler.loc:172.17.0.1"
+      - "dev.raffler.loc:172.17.0.1"
+      - "test.raffler.loc:172.17.0.1"
     environment:
       APP_ENV: dev
       APP_DEBUG: 1
