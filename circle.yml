@@ -1,0 +1,53 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: msvrtan/square:0.2.2
+    working_directory: /var/www
+    parallel: 1
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: cache-v4-{{ checksum "composer.lock" }}
+
+      - run:
+          name: Setup
+          command: ./etc/circleci2/setup.sh
+
+          
+      - run:
+          name: Composer install
+          command: SYMFONY_ENV=test composer install --prefer-dist --no-interaction
+
+      - run:
+          name: Lint all PHP code files
+          command: find src/ -type f -name "*.php" -print0 | xargs -0 -n1 php -l
+
+      - run:
+          name: PHPUnit
+          command: ./vendor/bin/phpunit
+
+      - run:
+          name: Behat
+          command: ./vendor/bin/behat
+
+      - run:
+          name: PHPStan
+          command: ./vendor/bin/phing phpstan
+
+      - run:
+          name: Code standards
+          command: ./vendor/bin/phing check-codestandards
+
+      - save_cache:
+          key: cache-v4-{{ checksum "composer.lock" }}
+          paths:
+            - /var/www/vendor
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build

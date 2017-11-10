@@ -1,0 +1,94 @@
+
+version: '2'
+
+services:
+
+  raffler-frontend-code:
+    image: msvrtan/code:0.2.0
+    container_name: raffler-frontend-code
+    volumes:
+      - ./:/var/www
+
+  raffler-frontend-nginx:
+    build:
+      context: ./etc/docker/nginx-sf4-dev
+    container_name: raffler-frontend-nginx
+    volumes_from:
+      - raffler-frontend-code
+    volumes:
+      - ./var/logs/dev/nginx/:/var/log/nginx
+    ports:
+      - "8001:80"
+    links:
+      - raffler-frontend-php7fpm-dev
+      - raffler-frontend-php7fpm-test
+
+  raffler-frontend-php7fpm-dev:
+    container_name: raffler-frontend-php7fpm-dev
+    image: msvrtan/php7fpm-dev:0.4.1
+    shm_size: 256MB
+    volumes_from:
+      - raffler-frontend-code
+    volumes:
+      - ./var/logs/dev/php-fpm/:/var/log/php-fpm
+    expose:
+      - "9000"
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+      APP_SECRET: f89cdd4e751e8144aeb61d81fb78fc65
+      API_BASE_URL: http://dev.raffler.loc:8000/api/
+    extra_hosts:
+      - "dev.frontend-raffler.loc:172.17.0.1"
+      - "test.frontend-raffler.loc:172.17.0.1"
+
+  raffler-frontend-php7fpm-test:
+    container_name: raffler-frontend-php7fpm-test
+    image: msvrtan/php7fpm-dev:0.4.1
+    shm_size: 256MB
+    volumes_from:
+      - raffler-frontend-code
+    volumes:
+      - ./var/logs/test/php-fpm/:/var/log/php-fpm
+    expose:
+      - "9000"
+    environment:
+      APP_ENV: test
+      APP_DEBUG: 1
+      APP_SECRET: f89cdd4e751e8144aeb61d81fb78fc65
+      API_BASE_URL: http://test.raffler.loc:8000/api/
+    extra_hosts:
+      - "dev.frontend-raffler.loc:172.17.0.1"
+      - "test.frontend-raffler.loc:172.17.0.1"
+
+  raffler-frontend-workspace:
+    container_name: raffler-frontend-workspace
+    image: msvrtan/workspace-dev:0.5.0
+    shm_size: 256MB
+    volumes_from:
+      - raffler-frontend-code
+    links:
+      - raffler-frontend-nginx
+    extra_hosts:
+      - "dev.frontend-raffler.loc:172.17.0.1"
+      - "test.frontend-raffler.loc:172.17.0.1"
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+      APP_SECRET: f89cdd4e751e8144aeb61d81fb78fc65
+      API_BASE_URL: http://test.raffler.loc:8000/api/
+
+  raffler-frontend-xdebug:
+    container_name: raffler-frontend-xdebug
+    image: msvrtan/xdebug-dev:0.4.1
+    shm_size: 256MB
+    volumes_from:
+      - raffler-frontend-code
+    extra_hosts:
+      - "dev.frontend-raffler.loc:172.17.0.1"
+      - "test.frontend-raffler.loc:172.17.0.1"
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+      APP_SECRET: f89cdd4e751e8144aeb61d81fb78fc65
+      API_BASE_URL: http://test.raffler.loc:8000/api/
