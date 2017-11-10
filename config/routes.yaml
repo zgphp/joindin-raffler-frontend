@@ -1,8 +1,28 @@
-#index:
-#    path: /
-#    defaults: { _controller: 'App\Controller\DefaultController::index' }
 
-# first, run composer req annotations
-#controllers:
-#    resource: ../src/Controller/
-#    type: annotation
+raffle_web_homepage:
+    path: /web/
+    defaults: { _controller: 'App\Controller\RaffleWebController::index' }
+
+raffle_web_start:
+    path: /web/raffle/start
+    methods: [POST]
+    defaults: { _controller: 'App\Controller\RaffleWebController::start' }
+
+raffle_web_show:
+    path: /web/raffle/{id}
+    defaults: { _controller: 'App\Controller\RaffleWebController::show' }
+
+raffle_web_pick:
+    path: /web/raffle/{id}/pick
+    methods: [POST]
+    defaults: { _controller: 'App\Controller\RaffleWebController::pick' }
+
+raffle_web_winner:
+    path: /web/raffle/{id}/winner/{userId}
+    methods: [POST]
+    defaults: { _controller: 'App\Controller\RaffleWebController::winner' }
+
+raffle_web_noshow:
+    path: /web/raffle/{id}/no_show/{userId}
+    methods: [POST]
+    defaults: { _controller: 'App\Controller\RaffleWebController::noShow' }
