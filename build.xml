@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<project default="default" name="ZgPHP joind.in raffler frontend">
+
+    <target name="default" description="Help target">
+        <exec command="phing -l" passthru="true"/>
+    </target>
+
+    <target name="test" depends="phpunit,behat,fix-codestandards,phpstan"/>
+
+    <target name="fix-codestandards" depends="php-cs-fixer-fix,phpmd,phpcs"/>
+    <target name="check-codestandards" depends="php-cs-fixer-check,phpmd,phpcs"/>
+
+    <target name="php-cs-fixer-fix" description="Run php-cs-fixer fix">
+        <retry retrycount="3">
+            <exec command="./vendor/bin/php-cs-fixer fix" passthru="true" checkreturn="true"/>
+        </retry>
+    </target>
+
+    <target name="phpunit" description="Run phpunit">
+        <exec command="./vendor/bin/phpunit" passthru="true" checkreturn="true"/>
+    </target>
+
+    <target name="behat" description="Run behat">
+        <exec command="./vendor/bin/behat" passthru="true" checkreturn="true"/>
+    </target>
+
+    <target name="phpstan" description="Run phpstan">
+        <exec command="./vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests" passthru="true" checkreturn="true"/>
+    </target>
+
+    <target name="php-cs-fixer-check" description="Run php-cs-fixer check">
+        <exec command="./vendor/bin/php-cs-fixer fix --dry-run --diff" passthru="true" checkreturn="true"/>
+    </target>
+
+    <target name="phpmd" description="Run phpmd">
+        <phingcall target="phpmd-task">
+            <property name="path" value="src"/>
+        </phingcall>
+        <phingcall target="phpmd-task">
+            <property name="path" value="tests"/>
+        </phingcall>
+    </target>
+
+    <target name="phpcs" description="Run phpcs">
+        <phingcall target="phpcs-task">
+            <property name="path" value="src"/>
+        </phingcall>
+        <phingcall target="phpcs-task">
+            <property name="path" value="tests"/>
+        </phingcall>
+    </target>
+
+    <target name="phpmd-task" description="Run php mess detector">
+        <exec command="./vendor/bin/phpmd ${path} text phpmd.xml" passthru="true" checkreturn="true"/>
+    </target>
+    <target name="phpcs-task" description="Run php code sniffer">
+        <exec command="./vendor/bin/phpcs --standard=phpcs.xml ${path} -n" passthru="true" checkreturn="true"/>
+    </target>
+
+</project>

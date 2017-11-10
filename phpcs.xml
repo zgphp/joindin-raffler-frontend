@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="pcsg-generated-ruleset">
+<description>Created with the PHP Coding Standard Generator. http://edorian.github.com/php-coding-standard-generator/
+</description>
+<exclude-pattern>*/cache/prod/*</exclude-pattern>
+<exclude-pattern>*/cache/dev/*</exclude-pattern>
+<exclude-pattern>*/cache/test/*</exclude-pattern>
+<exclude-pattern>*/Migrations/*</exclude-pattern>
+<exclude-pattern>*.js</exclude-pattern>
+<exclude-pattern>*.css</exclude-pattern>
+
+<rule ref="Generic.Classes.DuplicateClassName"/>
+<rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"/>
+<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"/>
+<rule ref="Generic.CodeAnalysis.JumbledIncrementer"/>
+<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+<rule ref="Generic.CodeAnalysis.UselessOverridingMethod"/>
+<rule ref="Generic.Commenting.Todo"/>
+<rule ref="Generic.Commenting.Fixme"/>
+<rule ref="Generic.ControlStructures.InlineControlStructure"/>
+<rule ref="Generic.Debug.ClosureLinter"/>
+<rule ref="Generic.Debug.JSHint"/>
+<rule ref="Generic.Debug.CSSLint"/>
+<rule ref="Generic.Files.ByteOrderMark"/>
+<rule ref="Generic.Files.LineEndings"/>
+<rule ref="Generic.Files.LineLength">
+    <properties>
+		<property name="lineLimit" value="100"/>
+        <property name="absoluteLineLimit" value="150"/>
+
+    </properties>
+    <exclude-pattern>*GitHubInstallationApplicationContext*</exclude-pattern>
+</rule>
+<rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+<rule ref="Generic.Formatting.MultipleStatementAlignment"/>
+<rule ref="Generic.Functions.CallTimePassByReference"/>
+<rule ref="Generic.Metrics.CyclomaticComplexity"/>
+<rule ref="Generic.Metrics.NestingLevel"/>
+<rule ref="Generic.NamingConventions.ConstructorName"/>
+<rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+<rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>
+<rule ref="Generic.PHP.DeprecatedFunctions"/>
+<rule ref="Generic.PHP.DisallowShortOpenTag"/>
+<rule ref="Generic.PHP.ForbiddenFunctions"/>
+<rule ref="Generic.PHP.LowerCaseConstant"/>
+<rule ref="Generic.PHP.NoSilencedErrors"/>
+<rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+<rule ref="Generic.VersionControl.SubversionProperties"/>
+<rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+<rule ref="Generic.WhiteSpace.ScopeIndent"/>
+<rule ref="MySource.PHP.EvalObjectFactory"/>
+<rule ref="PSR2.Classes.ClassDeclaration"/>
+<rule ref="PSR2.Classes.PropertyDeclaration"/>
+<rule ref="PSR2.ControlStructures.ControlStructureSpacing"/>
+<rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+<rule ref="PSR2.ControlStructures.SwitchDeclaration"/>
+<rule ref="PSR2.Files.EndFileNewline"/>
+<rule ref="PSR2.Methods.MethodDeclaration"/>
+<rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
+<rule ref="PSR2.Namespaces.UseDeclaration"/>
+<rule ref="Squiz.PHP.CommentedOutCode"/>
+<rule ref="Squiz.PHP.DisallowComparisonAssignment"/>
+<rule ref="Squiz.PHP.DisallowInlineIf"/>
+<rule ref="Squiz.PHP.DisallowMultipleAssignments"/>
+<rule ref="Squiz.PHP.DisallowObEndFlush"/>
+<rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
+<rule ref="Squiz.PHP.DiscouragedFunctions">
+    <properties>
+        <property name="error" value="true"/>
+    </properties>
+</rule>
+<rule ref="Squiz.PHP.Eval"/>
+<rule ref="Squiz.PHP.ForbiddenFunctions"/>
+<rule ref="Squiz.PHP.GlobalKeyword"/>
+<rule ref="Squiz.PHP.LowercasePHPFunctions"/>
+<rule ref="Squiz.PHP.NonExecutableCode"/>
+<rule ref="Squiz.Scope.MemberVarScope"/>
+<rule ref="Squiz.Scope.MethodScope"/>
+<rule ref="Squiz.Scope.StaticThisUsage"/>
+<rule ref="Zend.Files.ClosingTag"/>
+</ruleset>

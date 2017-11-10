@@ -1,0 +1,40 @@
+
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> php-cs-fixer ###
+/.php_cs.cache
+###< php-cs-fixer ###
+
+###> PHPStorm ###
+/.idea
+###< PHPStorm ###
+
+###> MacOSX ###
+.DS_Store
+###< MacOSX ###
+
+###> backup files from unix editors ###
+*~
+###< backup files from unix editors ###
+
+
+###> merge files ###
+*.orig
+###< merge files ###
+
+###> composer ###
+composer.phar
+###< composer ###
+###> behat/symfony2-extension ###
+behat.yml
+###< behat/symfony2-extension ###
+
+###> friendsofphp/php-cs-fixer ###
+.php_cs
+.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
