@@ -5,17 +5,23 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class RaffleWebController extends Controller
 {
     /** @var Client */
     private $client;
+    private $session;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, SessionInterface $session)
     {
         $this->client = $client;
+
+        $this->session = $session;
+        $this->session->start();
     }
 
     /*
@@ -42,6 +48,9 @@ class RaffleWebController extends Controller
         ];
 
         $raffleId = $this->apiPostJson('raffle/start', $options);
+        if (null === $raffleId) {
+            return $this->redirect($this->generateUrl('raffle_web_homepage'));
+        }
 
         return $this->redirect($this->generateUrl('raffle_web_show', ['id' => $raffleId]));
     }
@@ -88,8 +97,23 @@ class RaffleWebController extends Controller
 
     private function apiPostJson(string $url, array $options = [])
     {
-        $response = $this->client->post(getenv('API_BASE_URL').$url, $options);
+        try {
+            $response = $this->client->post(getenv('API_BASE_URL').$url, $options);
 
-        return json_decode($response->getBody()->getContents(), true);
+            $raffleID = json_decode($response->getBody()->getContents(), true);
+            if (204 === $response->getStatusCode()) {
+                $this->session->getFlashBag()->add('notice', 'Selected event has no comments to raffle!');
+
+                return null;
+            }
+
+            return $raffleID;
+        } catch (ClientException $ex) {
+            if (400 === $ex->getCode()) {
+                $this->session->getFlashBag()->add('error', 'No events selected! It\'s a must, yo!');
+
+                return null;
+            }
+        }
     }
 }
