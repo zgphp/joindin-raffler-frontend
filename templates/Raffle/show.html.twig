@@ -9,6 +9,18 @@
             </div>
         {% endfor %}
     </div>
+
+    <div class="row text-center" style="height: 20px;">
+
+    </div>
+
+    <div class="row text-center" style="background: rgba(100, 0, 0, 0.74)">
+        {% for comment in raffle.commentsNotEligibleForRaffling %}
+            <div class="col-md-3 text-white" style="text-shadow: 0 0 10px #000;font-size: 40px;">
+                {{ comment.user.displayName }}
+            </div>
+        {% endfor %}
+    </div>
     <div class="row text-center text-white" style="margin-left:0px; position: absolute; bottom: 50px; width: 100%;
     background: rgba(0, 0, 0, 0.74)">
         <div class="col-md-4">
@@ -22,7 +34,9 @@
             {% endif %}
         </div>
         <div class="col-md-4">
-            There are {{ raffle.commentsEligibleForRaffling | length }} eligible!
+            There are {{ raffle.commentsEligibleForRaffling | length }} eligible comments!
+            <br>
+            There are {{ raffle.commentsNotEligibleForRaffling | length }} non-eligible comments!
         </div>
     </div>
 
