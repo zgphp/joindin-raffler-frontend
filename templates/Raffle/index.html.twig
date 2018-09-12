@@ -34,7 +34,7 @@
             <form action="/raffle/start" method="POST">
                 <table class="table table-condensed" style="background: rgba(0, 0, 0, 0.74)">
 
-                    {% for event in events %}
+                    {% for event in events|slice(0, 8) %}
                         <tr>
                             <td>
                                 <input type="checkbox" name="{{ event.id }}">
